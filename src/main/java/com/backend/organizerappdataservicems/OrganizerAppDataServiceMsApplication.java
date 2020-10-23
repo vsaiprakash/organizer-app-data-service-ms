@@ -11,17 +11,9 @@ import com.backend.organizerappdataservicems.dataservice.ToDoMasterListRepositor
 
 @SpringBootApplication
 public class OrganizerAppDataServiceMsApplication {
-	
-	@Autowired
-	static ToDoMasterListRepository todoRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrganizerAppDataServiceMsApplication.class, args);
-		List<ToDoMasterListItem> items = todoRepo.findAll();
-		
-		for(int i=0; i < items.size(); i++) {
-			System.out.println("Item:"+i+" - "+items.get(i).id+" "+items.get(i).title);
-		}
 	}
 
 }

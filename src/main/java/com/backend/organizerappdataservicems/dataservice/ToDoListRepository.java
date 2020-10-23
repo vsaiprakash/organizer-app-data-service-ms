@@ -17,5 +17,5 @@ public interface ToDoListRepository extends JpaRepository<ToDoListItem, Integer>
 	
 	//Update/Put
 	ToDoListItem save(ToDoListItem item);
-	List<ToDoListItem> saveAll(List<ToDoListItem> itemList);
+//	List<ToDoListItem> saveAll(List<ToDoListItem> itemList);
 }

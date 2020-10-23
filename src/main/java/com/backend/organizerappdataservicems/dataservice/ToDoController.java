@@ -1,5 +1,8 @@
 package com.backend.organizerappdataservicems.dataservice;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +24,17 @@ import com.backend.organizerappdataservicems.bean.ToDoMasterListItem;
 @RestController("/api")
 public class ToDoController {
 	
+	@Autowired
+	ToDoMasterListRepository toDoMasterListRepository;
+	
 	@GetMapping("/todomasterlist")
-	ToDoMasterList retrieveToDoMasterList() {
-		return null;
+	List<ToDoMasterListItem> retrieveToDoMasterList() {
+		return toDoMasterListRepository.findAll();
 	}
 	
 	@GetMapping("/todomasterlist/{id}")
 	ToDoMasterListItem retrieveToDoMasterListItem(@PathVariable int id) {
-		return null;
+		return toDoMasterListRepository.getOne(id);
 	}
 	
 	@PutMapping(path="/todomasterlist/{id}",

@@ -2,6 +2,7 @@ package com.backend.organizerappdataservicems.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /*
  *    "id": 1,
@@ -10,6 +11,7 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name="todomasterlist")
 public class ToDoMasterListItem {
 	
 	@Id

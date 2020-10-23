@@ -17,5 +17,5 @@ public interface ToDoMasterListRepository extends JpaRepository<ToDoMasterListIt
 	
 	//Update/Put
 	ToDoMasterListItem save(ToDoMasterListItem item);
-	List<ToDoMasterListItem> saveAll(List<ToDoMasterListItem> itemList);
+//	List<ToDoMasterListItem> saveAll(List<ToDoMasterListItem> itemList);
 }
