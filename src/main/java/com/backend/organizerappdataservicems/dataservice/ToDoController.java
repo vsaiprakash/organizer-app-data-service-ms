@@ -38,29 +38,37 @@ public class ToDoController {
 		List<ToDoMasterListItem> masterlist = toDoMasterListRepository.findAll();
 		List<ToDoListItem> list = toDoListRepository.findAll();
 		
-		for(int j=0;j<list.size();++j ) {
-			System.out.println("listId:"+list.get(j).getListId());
-			System.out.println("content:"+list.get(j).getContent());
+		for(int i=0; i< masterlist.size(); ++i) {
+			
+			List<ToDoListItem> todolist = new ArrayList<ToDoListItem>();
+			for(int j=0;j<list.size();++j ) {
+				if(masterlist.get(i).getId()==list.get(j).getListId()) {
+					todolist.add(list.get(j));
+				}
+			}
+			masterlist.get(i).setTodolist(todolist);
 		}
-		
-//		for(int i=0; i< masterlist.size(); ++i) {
-//			
-//			List<ToDoListItem> todolist = new ArrayList<ToDoListItem>();
-//			for(int j=0;j<list.size();++j ) {
-//				System.out.println("masterlist.get(i).getId()["+i+"]:"+masterlist.get(i).getId()+"list.get(j).getListId()["+j+"]:"+list.get(j).getListId());
-//				if(masterlist.get(i).getId()==list.get(j).getListId()) {
-//					todolist.add(list.get(j));
-//				}
-//			}
-//			masterlist.get(i).setTodolist(todolist);
-//		}
 		
 		return masterlist;
 	}
 	
 	@GetMapping("/todomasterlist/{id}")
-	Optional<ToDoMasterListItem> retrieveToDoMasterListItem(@PathVariable int id) {
-		return toDoMasterListRepository.findById(id);
+	ToDoMasterListItem retrieveToDoMasterListItem(@PathVariable int id) {
+		
+		ToDoMasterListItem toDoMasterListItem = toDoMasterListRepository.findById(id).get();
+		List<ToDoListItem> list = toDoListRepository.findAll();
+		
+		List<ToDoListItem> todolist = new ArrayList<ToDoListItem>();
+		
+		for(int j=0;j<list.size();++j ) {
+			if(toDoMasterListItem.getId()==list.get(j).getListId()) {
+				todolist.add(list.get(j));
+			}
+		}
+		toDoMasterListItem.setTodolist(todolist);
+		
+		
+		return toDoMasterListItem;
 	}
 	
 	@PutMapping(path="/todomasterlist/{id}",
