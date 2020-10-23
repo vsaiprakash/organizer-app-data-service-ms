@@ -6,10 +6,15 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /*
  *        "id": 1,
           "completed": true,
           "content": "sugar"
+          
+          listId is added only for relation with master table. So, we will ignore it
+          when responding as Json response.
  */
 @Entity
 @Table(name="todolist")
@@ -20,6 +25,7 @@ public class ToDoListItem {
 	private Integer id;
 	@Id
 	@Column(name="list_id")
+	@JsonIgnore
 	private Integer listId;
 	private Boolean completed;
 	private String content;
