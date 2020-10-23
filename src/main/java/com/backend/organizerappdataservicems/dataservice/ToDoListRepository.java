@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.backend.organizerappdataservicems.bean.ToDoListId;
 import com.backend.organizerappdataservicems.bean.ToDoListItem;
 
 @Repository
-public interface ToDoListRepository extends JpaRepository<ToDoListItem, Integer> {
+public interface ToDoListRepository extends JpaRepository<ToDoListItem, ToDoListId> {
 	//Get
 	List<ToDoListItem> findAll();
 	Optional<ToDoListItem> findById(Integer id);
