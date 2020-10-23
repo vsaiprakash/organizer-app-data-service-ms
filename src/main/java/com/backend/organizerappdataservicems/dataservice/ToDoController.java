@@ -75,7 +75,22 @@ public class ToDoController {
 			consumes=MediaType.APPLICATION_JSON_VALUE, 
 		    produces =MediaType.APPLICATION_JSON_VALUE)
 	ToDoMasterListItem updateToDoMasterListItem(@PathVariable int id, @RequestBody ToDoMasterListItem todoMasterListItem ) {
-		return null;
+		
+		//master list item
+		ToDoMasterListItem masterlistitem = new ToDoMasterListItem();
+		masterlistitem.setId(todoMasterListItem.getId());
+		masterlistitem.setTitle(todoMasterListItem.getTitle());
+		toDoMasterListRepository.save(masterlistitem);
+		
+		//todo list
+		List<ToDoListItem> listitems = todoMasterListItem.getTodolist();
+		for(int i=0; i< listitems.size(); ++i) {
+			listitems.get(i).setListId(id);
+		}
+		toDoListRepository.saveAll(listitems);
+		
+		
+		return todoMasterListItem;
 	}
 	
 	@GetMapping("/todolist")
