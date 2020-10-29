@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /*
- *        "id": 1,
+ *        "id": "uuidv1",
           "completed": true,
           "content": "sugar"
           
@@ -22,24 +22,24 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ToDoListItem {
 	
 	@Id
-	private Integer id;
+	private String id;
 	@Id
 	@Column(name="list_id")
 	@JsonIgnore
-	private Integer listId;
+	private String listId;
 	private Boolean completed;
 	private String content;
 	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public Integer getListId() {
+	public String getListId() {
 		return listId;
 	}
-	public void setListId(Integer listId) {
+	public void setListId(String listId) {
 		this.listId = listId;
 	}
 	public Boolean getCompleted() {

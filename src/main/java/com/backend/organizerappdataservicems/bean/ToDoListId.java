@@ -15,14 +15,14 @@ public class ToDoListId implements Serializable {
 	
 	//Item Id
 	@Id
-	private Integer id;
+	private String id;
 	
 	//MasterList's Id
 	@Id
 	@Column(name="list_id")
-	private Integer listId;
+	private String listId;
 	
-	public ToDoListId(Integer id, Integer listId) {
+	public ToDoListId(String id, String listId) {
 		super();
 		this.id = id;
 		this.listId = listId;

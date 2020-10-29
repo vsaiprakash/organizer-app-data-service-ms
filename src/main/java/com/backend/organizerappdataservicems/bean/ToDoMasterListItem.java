@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /*
- *    "id": 1,
+ *    "id": "uuid",
       "title": "Grociers",
       "todolist": array of  ToDoListItem s
  */
@@ -18,18 +18,18 @@ import javax.persistence.Transient;
 public class ToDoMasterListItem {
 	
 	@Id
-	private Integer id;
+	private String id;
 	private String title;
 	
 	//added the list manually
 	@Transient
 	private List<ToDoListItem> todolist;
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

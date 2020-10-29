@@ -14,7 +14,7 @@ import com.backend.organizerappdataservicems.bean.ToDoListItem;
 public interface ToDoListRepository extends JpaRepository<ToDoListItem, ToDoListId> {
 	//Get
 	List<ToDoListItem> findAll();
-	Optional<ToDoListItem> findById(Integer id);
+	Optional<ToDoListItem> findById(ToDoListId id);
 	
 	//Update/Put
 	ToDoListItem save(ToDoListItem item);

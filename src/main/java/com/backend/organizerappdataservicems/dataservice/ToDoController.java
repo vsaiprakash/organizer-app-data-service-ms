@@ -47,7 +47,7 @@ public class ToDoController {
 			
 			List<ToDoListItem> todolist = new ArrayList<ToDoListItem>();
 			for(int j=0;j<list.size();++j ) {
-				if(masterlist.get(i).getId()==list.get(j).getListId()) {
+				if(masterlist.get(i).getId().equalsIgnoreCase(list.get(j).getListId())) {
 					todolist.add(list.get(j));
 				}
 			}
@@ -58,7 +58,7 @@ public class ToDoController {
 	}
 	
 	@GetMapping("/todomasterlist/{id}")
-	ToDoMasterListItem retrieveToDoMasterListItem(@PathVariable int id) {
+	ToDoMasterListItem retrieveToDoMasterListItem(@PathVariable String id) {
 		
 		ToDoMasterListItem toDoMasterListItem = toDoMasterListRepository.findById(id).get();
 		List<ToDoListItem> list = toDoListRepository.findAll();
@@ -66,7 +66,7 @@ public class ToDoController {
 		List<ToDoListItem> todolist = new ArrayList<ToDoListItem>();
 		
 		for(int j=0;j<list.size();++j ) {
-			if(toDoMasterListItem.getId()==list.get(j).getListId()) {
+			if(toDoMasterListItem.getId().equalsIgnoreCase(list.get(j).getListId())) {
 				todolist.add(list.get(j));
 			}
 		}
@@ -79,7 +79,7 @@ public class ToDoController {
 	@PutMapping(path="/todomasterlist/{id}",
 			consumes=MediaType.APPLICATION_JSON_VALUE, 
 		    produces =MediaType.APPLICATION_JSON_VALUE)
-	ToDoMasterListItem updateToDoMasterListItem(@PathVariable int id, @RequestBody ToDoMasterListItem todoMasterListItem ) {
+	ToDoMasterListItem updateToDoMasterListItem(@PathVariable String id, @RequestBody ToDoMasterListItem todoMasterListItem ) {
 		
 		//master list item
 		ToDoMasterListItem masterlistitem = new ToDoMasterListItem();
@@ -108,13 +108,13 @@ public class ToDoController {
 	
 	@DeleteMapping(path="/todomasterlist/{id}",
 			consumes=MediaType.APPLICATION_JSON_VALUE)
-	String deleteToDoMasterListItemById(@PathVariable int id) {
+	String deleteToDoMasterListItemById(@PathVariable String id) {
 		
 		List<ToDoListItem> todolist = toDoListRepository.findAll();
 		
 		//delete the items in the master list
 		todolist.forEach((item)->{
-			if(item.getListId()==id) {
+			if(item.getListId().equalsIgnoreCase(id)) {
 				System.out.println("ID:"+id);
 				ToDoListId primaryId = new ToDoListId(item.getId(), id);
 				System.out.println("DELETE BY ID master ID: "+id+" ID: "+item.getId());

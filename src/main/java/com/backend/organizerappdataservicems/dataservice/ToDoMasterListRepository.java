@@ -13,11 +13,11 @@ import com.backend.organizerappdataservicems.bean.ToDoMasterListItem;
 public interface ToDoMasterListRepository extends JpaRepository<ToDoMasterListItem, Integer>{
 	//Get
 	List<ToDoMasterListItem> findAll();
-	Optional<ToDoMasterListItem> findById(Integer id);
+	Optional<ToDoMasterListItem> findById(String id);
 	
 	//Update/Put
 	ToDoMasterListItem save(ToDoMasterListItem item);
 	//Delete a master list
-	void deleteById(int id);
+	void deleteById(String id);
 //	List<ToDoMasterListItem> saveAll(List<ToDoMasterListItem> itemList);
 }
