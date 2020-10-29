@@ -36,6 +36,8 @@
   ]
 }
 =============================================================================================
+docker details:
+container id: d0970c3a5d8d
 */
 
 CREATE TABLE todomasterlist ( id int, title varchar(255), PRIMARY KEY (id));

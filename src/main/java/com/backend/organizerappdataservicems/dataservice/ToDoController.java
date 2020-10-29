@@ -6,12 +6,16 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.organizerappdataservicems.bean.ToDoListId;
 import com.backend.organizerappdataservicems.bean.ToDoListItem;
 import com.backend.organizerappdataservicems.bean.ToDoMasterListItem;
 
@@ -23,7 +27,8 @@ import com.backend.organizerappdataservicems.bean.ToDoMasterListItem;
  * 
  * 
  */
-@RestController("/api")
+@RestController
+@RequestMapping("/api")
 public class ToDoController {
 	
 	@Autowired
@@ -92,6 +97,40 @@ public class ToDoController {
 		
 		return todoMasterListItem;
 	}
+	
+	@PostMapping(path="/todomasterlist",
+			consumes=MediaType.APPLICATION_JSON_VALUE, 
+		    produces =MediaType.APPLICATION_JSON_VALUE)
+	ToDoMasterListItem updateToDoMasterList( @RequestBody ToDoMasterListItem todoMasterListItem ) {
+		
+		return toDoMasterListRepository.save(todoMasterListItem);
+	}
+	
+	@DeleteMapping(path="/todomasterlist/{id}",
+			consumes=MediaType.APPLICATION_JSON_VALUE)
+	String deleteToDoMasterListItemById(@PathVariable int id) {
+		
+		List<ToDoListItem> todolist = toDoListRepository.findAll();
+		
+		//delete the items in the master list
+		todolist.forEach((item)->{
+			if(item.getListId()==id) {
+				System.out.println("ID:"+id);
+				ToDoListId primaryId = new ToDoListId(item.getId(), id);
+				System.out.println("DELETE BY ID master ID: "+id+" ID: "+item.getId());
+				toDoListRepository.deleteById(primaryId);
+			}
+			
+		});
+		
+//		//delete the whole master list entry
+		toDoMasterListRepository.deleteById(id);
+		System.out.println("DELETE BY ID from todomasterlist - "+id);
+		
+		return "{}";
+	}
+	
+//	, produces =MediaType.APPLICATION_JSON_VALUE
 	
 	@GetMapping("/todolist")
 	List<ToDoListItem> retrieveToDoList() {

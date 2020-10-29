@@ -18,5 +18,10 @@ public interface ToDoListRepository extends JpaRepository<ToDoListItem, ToDoList
 	
 	//Update/Put
 	ToDoListItem save(ToDoListItem item);
+	//Delete an item from master list
+//	void delete(ToDoListItem item);
+	//Delete a master list & its items
+	void deleteById(ToDoListId id);
+//	int deleteByIdAndListId(int id, int listId);
 //	List<ToDoListItem> saveAll(List<ToDoListItem> itemList);
 }

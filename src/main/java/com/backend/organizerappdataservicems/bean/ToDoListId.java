@@ -13,8 +13,11 @@ import javax.persistence.Id;
 
 public class ToDoListId implements Serializable {
 	
+	//Item Id
 	@Id
 	private Integer id;
+	
+	//MasterList's Id
 	@Id
 	@Column(name="list_id")
 	private Integer listId;
